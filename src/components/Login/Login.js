@@ -2,23 +2,40 @@ import "./Login.css"
 
 import Card from "../UI/Card"
 import Button from "../UI/Button"
+import { useState } from "react"
 
 const Login = () => {
+    const [enteredEmail, setEnteredEmail]=useState("")
+    const [enteredPassword, setEnteredPassword]=useState("")
+    const [emailIsValid, setEmailIsValid]=useState("")
+    const [passwordIsValid, setPasswordIsValid]=useState("")
+
+    const emailChangeHandler=(event)=>{
+    }
+    const passwordChangeHandler=(event)=>{
+    }
+    const emailValidateHandler=()=>{
+        setEmailIsValid(enteredEmail.includes("@"))
+    }
+    const passwordValidateHandler=()=>{
+        setPasswordIsValid(enteredPassword.trim().length>6)
+    }
+
     return (
         <Card className="login">
             <form>
-                <div className="control">
+                <div className={`control ${emailIsValid===false?'invalid':''}`}>
                     <label for="email">Email</label>
                     <input 
                     type="email"
-                    id="email"
+                    onBlur={emailValidateHandler}
                     ></input>
                 </div>
-                <div className="control">
+                <div className={`control ${passwordIsValid===false?'invalid':''}`}>
                     <label for="password">Password</label>
                     <input 
                     type="password"
-                    id="password"
+                    onBlur={passwordValidateHandler}
                     ></input>
                 </div>
                 <div className="actions">
